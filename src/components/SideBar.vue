@@ -4,24 +4,15 @@
             app
             v-model="sideBar"
     >
-        <v-list dense>
-            <v-list-tile @click="">
+        <v-list>
+            <v-list-tile v-for="item of sideBarItems" @click="" :key="item.title" :to="'/admin/' + item.route" exact>
                 <v-list-tile-action>
-                    <v-icon>home</v-icon>
+                    <v-icon>{{item.icon}}</v-icon>
                 </v-list-tile-action>
-                <v-list-tile-content>
-                    <v-list-tile-title>Home</v-list-tile-title>
-                </v-list-tile-content>
-            </v-list-tile>
-            <v-list-tile @click="">
-                <v-list-tile-action>
-                    <v-icon>contact_mail</v-icon>
-                </v-list-tile-action>
-                <v-list-tile-content>
-                    <v-list-tile-title>Contact</v-list-tile-title>
-                </v-list-tile-content>
+                <v-list-tile-title>{{item.title}}</v-list-tile-title>
             </v-list-tile>
         </v-list>
+
     </v-navigation-drawer>
 </template>
 
@@ -29,7 +20,13 @@
     export default {
         name: "SideBar",
         data: () => ({
-           sideBar: true
+           sideBar: true,
+           sideBarItems: [
+               {title: "Home", icon: "home", route: ''},
+               {title: "Cuisines", icon: "restaurant_menu", route: 'cuisines'},
+               {title: "units", icon: "straighten", route: 'units'},
+               {title: "Recipes", icon: "cake", route: 'recipes'}
+           ]
         }),
         props: ['drawer'],
         watch: {
