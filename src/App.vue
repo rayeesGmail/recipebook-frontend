@@ -1,31 +1,29 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+    <v-app id="inspire">
+        <side-bar :drawer="drawer" v-on:sidebar-toggled="drawer = $event"></side-bar>
+        <tool-bar v-on:toggle-sidebar="drawer = !drawer"></tool-bar>
+        <v-content>
+            <v-container>
+                <router-view></router-view>
+            </v-container>
+        </v-content>
+        <app-footer></app-footer>
+    </v-app>
 </template>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
+<script>
+    import AppFooter from './components/Footer'
+    import SideBar from './components/SideBar'
+    import ToolBar from './components/ToolBar'
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+    export default {
+    components : {
+      AppFooter,
+      SideBar,
+      ToolBar
+    },
+    data: ()=>({
+        drawer: true
+    })
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+</script>
